@@ -59,6 +59,34 @@ Build and launch the DevOps community platform with:
 - Anti-spam and trust levels
 - Enable backups and admin alerts
 
+### Discourse Implementation (Hostinger)
+
+Prerequisites checklist:
+- Hostinger plan supports Docker and SSH access
+- At least 2 vCPU and 4GB RAM recommended for Discourse
+- Ports 80 and 443 open (HTTP/HTTPS)
+- Domain forumdevops.com points to the server IP
+
+Install steps (self-hosted):
+1) Install Docker and Docker Compose
+2) Clone Discourse Docker image repo
+3) Configure app.yml (domain, SMTP, admin email)
+4) Bootstrap and start Discourse container
+5) Run initial web setup wizard
+6) Configure languages and categories
+
+Post-install:
+- Configure backups and schedule
+- Enable login via Google/GitHub
+- Configure email deliverability (SPF/DKIM/DMARC)
+- Enable basic anti-spam and rate limits
+
+Inputs needed to proceed:
+- SSH access to Hostinger server
+- Confirmation Docker is allowed on the plan
+- Forum admin email
+- SMTP provider credentials
+
 ### 4) Blog (Django)
 
 - Create Django project + app for blog
