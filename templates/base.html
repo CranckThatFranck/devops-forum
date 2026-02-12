@@ -1,0 +1,149 @@
+{% load i18n %}
+<!doctype html>
+<html lang="{{ request.LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ site_brand }} Blog{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Source+Serif+4:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f6f2ea;
+            --ink: #1d1a16;
+            --accent: #1f6f5c;
+            --accent-2: #f0a500;
+            --card: #ffffff;
+            --muted: #6c665c;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Source Serif 4", serif;
+            color: var(--ink);
+            background: radial-gradient(1200px 600px at 10% -10%, #ffe9c7 0%, transparent 60%),
+                        radial-gradient(900px 500px at 90% 0%, #d7f4ee 0%, transparent 55%),
+                        var(--bg);
+        }
+        header {
+            padding: 28px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand {
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            font-size: 22px;
+        }
+        .brand a { color: var(--ink); text-decoration: none; }
+        .nav {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 14px;
+        }
+        .nav a { color: var(--ink); text-decoration: none; opacity: 0.85; }
+        .nav a:hover { opacity: 1; }
+        .lang-form select {
+            border: 1px solid #d2c9b8;
+            background: #fff;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-family: "Space Grotesk", sans-serif;
+        }
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 12px 20px 60px 20px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero {
+            padding: 24px;
+            background: var(--card);
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-family: "Space Grotesk", sans-serif;
+            margin: 0 0 8px 0;
+            font-size: 34px;
+        }
+        .hero p { margin: 0; color: var(--muted); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .card {
+            background: var(--card);
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .card h2 {
+            font-family: "Space Grotesk", sans-serif;
+            margin: 0;
+            font-size: 20px;
+        }
+        .meta {
+            font-size: 13px;
+            color: var(--muted);
+        }
+        a.button {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 14px;
+        }
+        footer {
+            padding: 24px 20px 40px 20px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+        @media (max-width: 680px) {
+            header { flex-direction: column; gap: 12px; }
+            .hero h1 { font-size: 28px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand"><a href="/">{{ site_brand }}</a></div>
+        <nav class="nav">
+            <a href="/">Blog</a>
+            <a href="{{ forum_url }}">Forum</a>
+            <form class="lang-form" action="/i18n/setlang/" method="post">
+                {% csrf_token %}
+                <select name="language" onchange="this.form.submit()">
+                    <option value="pt-br" {% if request.LANGUAGE_CODE == "pt-br" %}selected{% endif %}>PT-BR</option>
+                    <option value="en" {% if request.LANGUAGE_CODE == "en" %}selected{% endif %}>EN</option>
+                    <option value="es" {% if request.LANGUAGE_CODE == "es" %}selected{% endif %}>ES</option>
+                </select>
+            </form>
+        </nav>
+    </header>
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <div>Forum DevOps - Comunidade e conteudo para profissionais DevOps.</div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ site_brand }} Blog{% endblock %}
+{% block content %}
+<div class="hero">
+    <h1>Blog DevOps: conhecimento pratico e atual</h1>
+    <p>Artigos, guias e noticias para profissionais de DevOps. Participe do forum e compartilhe experiencias.</p>
+    <p style="margin-top: 16px;"><a class="button" href="{{ forum_url }}">Ir para o Forum</a></p>
+</div>
+<div class="grid">
+    {% for post in posts %}
+        <article class="card">
+            <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+            <div class="meta">
+                {{ post.published_at|date:"d/m/Y" }} - {{ post.category }}
+            </div>
+            <p>{{ post.summary|default:post.body|truncatewords:28 }}</p>
+            <a class="button" href="{{ post.get_absolute_url }}">Ler artigo</a>
+        </article>
+    {% empty %}
+        <article class="card">
+            <h2>Nenhum post publicado</h2>
+            <p>Em breve teremos os primeiros artigos.</p>
+        </article>
+    {% endfor %}
+</div>
+{% endblock %}

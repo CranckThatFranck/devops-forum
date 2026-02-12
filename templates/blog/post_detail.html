@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} | {{ site_brand }}{% endblock %}
+{% block content %}
+<article class="hero">
+    <h1>{{ post.title }}</h1>
+    <div class="meta">{{ post.published_at|date:"d/m/Y" }} - {{ post.category }}</div>
+</article>
+<article class="card" style="max-width: 880px; margin: 0 auto;">
+    {{ post.body|linebreaks }}
+</article>
+{% endblock %}

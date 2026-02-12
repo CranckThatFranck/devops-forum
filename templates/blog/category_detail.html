@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ category }} | {{ site_brand }}{% endblock %}
+{% block content %}
+<div class="hero">
+    <h1>{{ category }}</h1>
+    <p>Artigos relacionados a esta categoria.</p>
+</div>
+<div class="grid">
+    {% for post in posts %}
+        <article class="card">
+            <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+            <div class="meta">
+                {{ post.published_at|date:"d/m/Y" }}
+            </div>
+            <p>{{ post.summary|default:post.body|truncatewords:28 }}</p>
+            <a class="button" href="{{ post.get_absolute_url }}">Ler artigo</a>
+        </article>
+    {% empty %}
+        <article class="card">
+            <h2>Nenhum post nesta categoria</h2>
+            <p>Volte mais tarde para novos artigos.</p>
+        </article>
+    {% endfor %}
+</div>
+{% endblock %}
