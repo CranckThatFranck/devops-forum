@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
     "parler",
     "blog",
 ]
@@ -108,3 +109,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SITE_BRAND = os.environ.get("SITE_BRAND", "Forum DevOps")
 FORUM_URL = os.environ.get("FORUM_URL", "https://forumdevops.com")
+SITE_URL = os.environ.get("SITE_URL", "https://blog.devops.com")
